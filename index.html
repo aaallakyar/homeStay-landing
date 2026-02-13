@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomeStay | Аренда жилья для отпуска</title>
+
+    <!-- Fomantic UI Core CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.9.3/dist/semantic.min.css">
+
+    <!-- jQuery (необходим для Fomantic UI JavaScript) -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
+
+    <!-- Fomantic UI JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.9.3/dist/semantic.min.js"></script>
+
+    <!-- Дополнительные стили (кастомизация) -->
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .main-container {
+            margin-top: 20px;
+            min-height: calc(100vh - 200px);
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, #2185d0 0%, #1a5a8c 100%);
+            color: white;
+            padding: 80px 0;
+            margin-bottom: 40px;
+            border-radius: 0 !important;
+        }
+
+        .footer {
+            margin-top: 50px;
+            padding: 30px 0;
+            background-color: #1b1c1d;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Хедер с навигацией -->
+    <div class="ui fixed borderless menu">
+        <div class="ui container">
+            <a href="#" class="header item">
+                <i class="home big icon" style="color: #2185d0;"></i>
+                <span style="font-weight: bold; font-size: 1.2rem;">HomeStay</span>
+            </a>
+            <a href="#" class="item">Главная</a>
+            <a href="#" class="item">Каталог</a>
+            <a href="#" class="item">Как это работает</a>
+            <a href="#" class="item">Контакты</a>
+    
+            <div class="right menu">
+                <div class="item">
+                    <div class="ui icon input">
+                        <input type="text" placeholder="Поиск жилья...">
+                        <i class="search icon"></i>
+                    </div>
+                </div>
+                <a href="#" class="ui item">
+                    <i class="user outline icon"></i> Войти
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero-секция -->
+    <div class="hero-section">
+        <div class="ui container">
+            <div class="ui stackable two column grid">
+                <div class="column">
+                    <h1 class="ui inverted huge header" style="font-size: 3rem;">
+                        Найди идеальное жилье для отпуска
+                    </h1>
+                    <p class="ui inverted large header sub header" style="font-weight: normal; margin-top: 20px;">
+                        Более 10 000 верифицированных объектов по всему миру.
+                        Мгновенное бронирование, честные отзывы и гарантия заселения.
+                    </p>
+                    <div style="margin-top: 30px;">
+                        <a href="#search" class="ui huge primary button">
+                            <i class="search icon"></i>
+                            Начать поиск
+                        </a>
+                        <a href="#how-it-works" class="ui huge inverted basic button">
+                            <i class="play icon"></i>
+                            Как это работает
+                        </a>
+                    </div>
+                </div>
+                <div class="column">
+                    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&h=400&fit=crop"
+                        class="ui fluid rounded image" alt="Уютное жилье для отпуска">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
