@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HomeStay | Аренда жилья для отпуска</title>
 
+    <!-- Google Fonts для эстетики -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    
     <!-- Fomantic UI Core CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.9.3/dist/semantic.min.css">
 
@@ -17,8 +22,41 @@
 
     <!-- Дополнительные стили (кастомизация) -->
     <style>
+        :root {
+            --pastel-lavender: #e2d1ff;
+            --pastel-mint: #d4f0f0;
+            --pastel-peach: #ffe6d5;
+            --pastel-rose: #fde2e4;
+            --pastel-sage: #e1e9d7;
+            --pastel-blue: #d4e2f0;
+            --primary-pastel: #c7b5a6;
+            --primary-pastel-dark: #b8a89a;
+            --text-dark: #2c2c2c;        /* Яркий темный текст */
+            --text-bright: #3a3a3a;       /* Яркий основной текст */
+            --text-soft: #5e5e5e;          /* Мягкий для второстепенного */
+            --text-light: #7e7e7e;         /* Светлый для мета-информации */
+            --bg-soft: #faf7f2;
+        }
+
         body {
-            background-color: #f8f9fa;
+            background-color: var(--bg-soft);
+            font-family: 'Inter', sans-serif;
+            color: var(--text-bright);    /* Яркий основной текст */
+        }
+
+        h1, h2, h3, .ui.header {
+            font-family: 'Playfair Display', serif !important;
+            font-weight: 500 !important;   /* Чуть жирнее для яркости */
+            letter-spacing: -0.02em;
+            color: var(--text-dark) !important;  /* Самый темный для заголовков */
+        }
+
+        p, li, .content, .description {
+            color: var(--text-bright);     /* Яркий для читаемости */
+        }
+
+        .sub.header, .meta, .label {
+            color: var(--text-soft) !important;  /* Мягкий для второстепенного */
         }
 
         .main-container {
@@ -26,18 +64,261 @@
             min-height: calc(100vh - 200px);
         }
 
-        .hero-section {
-            background: linear-gradient(135deg, #2185d0 0%, #1a5a8c 100%);
-            color: white;
-            padding: 80px 0;
-            margin-bottom: 40px;
-            border-radius: 0 !important;
+        /* Пастельный хедер с размытием */
+        .ui.fixed.menu {
+            background: rgba(250, 247, 242, 0.8) !important;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: none !important;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.02) !important;
         }
 
+        .ui.fixed.menu .item {
+            color: var(--text-bright) !important;  /* Яркий текст в меню */
+            transition: all 0.2s ease;
+        }
+
+        .ui.fixed.menu .item:hover {
+            color: var(--primary-pastel) !important;
+            background: transparent !important;
+        }
+
+        /* Пастельная hero-секция */
+        .hero-section {
+            background: linear-gradient(145deg, #e8ddd0 0%, #f5ede5 100%);
+            color: var(--text-dark);
+            padding: 100px 0;
+            margin-bottom: 40px;
+            border-radius: 0 !important;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '✦';
+            position: absolute;
+            bottom: -50px;
+            left: -50px;
+            font-size: 300px;
+            color: rgba(199, 181, 166, 0.05);
+            font-family: serif;
+            transform: rotate(-15deg);
+        }
+
+        .hero-section h1 {
+            color: var(--text-dark) !important;  /* Самый яркий для заголовка */
+            font-weight: 600 !important;
+        }
+
+        .hero-section .sub.header {
+            color: var(--text-bright) !important;  /* Яркий для подзаголовка */
+        }
+
+        /* Пастельные кнопки */
+        .ui.primary.button {
+            background-color: var(--primary-pastel) !important;
+            color: #ffffff !important;
+            border-radius: 40px !important;
+            padding: 1.2rem 2.5rem !important;
+            font-weight: 500 !important;
+            box-shadow: 0 10px 20px rgba(199, 181, 166, 0.2) !important;
+            transition: all 0.3s ease !important;
+        }
+
+        .ui.primary.button:hover {
+            background-color: var(--primary-pastel-dark) !important;
+            transform: translateY(-2px);
+            box-shadow: 0 15px 25px rgba(199, 181, 166, 0.3) !important;
+        }
+
+        .ui.basic.button {
+            border: 1px solid var(--primary-pastel) !important;
+            color: var(--primary-pastel-dark) !important;  /* Темнее для контраста */
+            border-radius: 40px !important;
+            padding: 1.2rem 2.5rem !important;
+            font-weight: 500 !important;
+            background: transparent !important;
+        }
+
+        .ui.basic.button:hover {
+            background: var(--primary-pastel) !important;
+            color: white !important;
+        }
+
+        /* Пастельные карточки */
+        .ui.card, .ui.cards>.card {
+            border: none !important;
+            border-radius: 24px !important;
+            box-shadow: 0 15px 35px -10px rgba(0,0,0,0.05) !important;
+            transition: all 0.3s ease !important;
+            overflow: hidden;
+            background: white !important;
+        }
+
+        .ui.card:hover, .ui.cards>.card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 25px 40px -15px rgba(199, 181, 166, 0.2) !important;
+        }
+
+        .ui.card .image img {
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .ui.card:hover .image img {
+            transform: scale(1.05);
+        }
+
+        .ui.card .content h3 {
+            color: var(--text-dark) !important;  /* Яркий для заголовков карточек */
+        }
+
+        .ui.card .content p {
+            color: var(--text-bright) !important;  /* Яркий для текста */
+        }
+
+        /* Пастельные иконки */
+        .ui.card .content i.circular.icon {
+            background-color: var(--pastel-lavender) !important;
+            color: var(--text-dark) !important;  /* Темный цвет иконок */
+            box-shadow: none !important;
+        }
+
+        /* Статистика с яркими цифрами */
+        .ui.statistic {
+            text-align: center;
+        }
+
+        .ui.statistic>.value {
+            font-family: 'Playfair Display', serif !important;
+            font-size: 2.8rem !important;
+            color: var(--text-dark) !important;  /* Яркие цифры */
+            font-weight: 600 !important;
+        }
+
+        .ui.statistic>.label {
+            font-family: 'Inter', sans-serif !important;
+            text-transform: none !important;
+            font-size: 0.9rem !important;
+            color: var(--text-soft) !important;
+        }
+
+        .ui.segment {
+            background: white !important;
+            border: none !important;
+            border-radius: 24px !important;
+            box-shadow: 0 10px 25px -10px rgba(0,0,0,0.03) !important;
+            padding: 30px !important;
+        }
+
+        /* Пастельные списки */
+        .ui.list .item i.icon {
+            color: var(--primary-pastel) !important;
+        }
+
+        .ui.list .item .content {
+            color: var(--text-bright) !important;  /* Яркий текст в списках */
+        }
+
+        .ui.list .item strong {
+            color: var(--text-dark) !important;  /* Жирный текст ярче */
+        }
+
+        /* Пастельные заголовки секций */
+        .ui.header {
+            color: var(--text-dark) !important;
+        }
+
+        .ui.header i.icon {
+            color: var(--primary-pastel) !important;
+        }
+
+        .ui.header .content {
+            color: var(--text-dark) !important;
+        }
+
+        .ui.header .sub.header {
+            color: var(--text-soft) !important;
+        }
+
+        /* Пастельные отзывы */
+        .ui.raised.segment {
+            background: white !important;
+            border: 1px solid rgba(199, 181, 166, 0.15) !important;
+            border-radius: 24px !important;
+            box-shadow: 0 10px 25px -10px rgba(0,0,0,0.02) !important;
+            padding: 25px !important;
+        }
+
+        .ui.raised.segment .header {
+            font-family: 'Inter', sans-serif !important;
+            font-weight: 600 !important;
+            color: var(--text-dark) !important;
+        }
+
+        .ui.raised.segment .meta {
+            color: var(--text-soft) !important;
+        }
+
+        .ui.raised.segment p {
+            color: var(--text-bright) !important;  /* Яркий текст отзыва */
+        }
+
+        .ui.raised.segment .quote i.icon {
+            color: var(--primary-pastel) !important;
+        }
+
+        /* Пастельный рейтинг */
+        .ui.rating .active.icon {
+            color: var(--primary-pastel) !important;
+            text-shadow: none !important;
+        }
+
+        /* Пастельный футер */
         .footer {
-            margin-top: 50px;
-            padding: 30px 0;
-            background-color: #1b1c1d;
+            background: #e8ddd0 !important;
+            margin-top: 80px !important;
+            padding: 60px 0 30px !important;
+            border-radius: 40px 40px 0 0 !important;
+        }
+
+        .footer .ui.header {
+            color: var(--text-dark) !important;
+        }
+
+        .footer .ui.link.list .item {
+            color: var(--text-bright) !important;  /* Яркие ссылки в футере */
+        }
+
+        .footer .ui.link.list .item:hover {
+            color: var(--primary-pastel-dark) !important;
+        }
+
+        .footer .ui.divider {
+            background: rgba(44, 44, 44, 0.1) !important;
+        }
+
+        .footer .ui.list .item {
+            color: var(--text-bright) !important;
+        }
+
+        .footer .ui.horizontal.list .item i.icon {
+            color: var(--text-dark) !important;  /* Яркие иконки соцсетей */
+            transition: color 0.2s ease;
+        }
+
+        .footer .ui.horizontal.list .item:hover i.icon {
+            color: var(--primary-pastel-dark) !important;
+        }
+
+        /* Декоративные элементы */
+        .decorative-icon {
+            position: absolute;
+            font-size: 200px;
+            color: rgba(199, 181, 166, 0.03);
+            pointer-events: none;
+            z-index: 0;
         }
     </style>
 </head>
@@ -219,11 +500,21 @@
                 </div>
             </h2>
             
+            <!-- Секция популярных направлений -->
+            <h2 class="ui header" style="text-align: center; margin: 60px 0 30px;">
+                <i class="map marker alternate icon" style="color: #db2828;"></i>
+                <div class="content">
+                    Популярные направления
+                </div>
+            </h2>
+            
             <div class="ui four column doubling stackable grid">
+                <!-- Париж -->
                 <div class="column">
                     <div class="ui fluid card">
                         <div class="image">
-                            <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=300&h=200&fit=crop">
+                            <img src="https://images.pexels.com/photos/699466/pexels-photo-699466.jpeg?w=300&h=200&fit=crop"
+                                alt="Париж">
                         </div>
                         <div class="content">
                             <h3>Париж</h3>
@@ -232,10 +523,13 @@
                         </div>
                     </div>
                 </div>
+            
+                <!-- Рим -->
                 <div class="column">
                     <div class="ui fluid card">
                         <div class="image">
-                            <img src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=300&h=200&fit=crop">
+                            <img src="https://images.pexels.com/photos/1797161/pexels-photo-1797161.jpeg?w=300&h=200&fit=crop"
+                                alt="Рим">
                         </div>
                         <div class="content">
                             <h3>Рим</h3>
@@ -244,10 +538,13 @@
                         </div>
                     </div>
                 </div>
+            
+                <!-- Барселона -->
                 <div class="column">
                     <div class="ui fluid card">
                         <div class="image">
-                            <img src="https://images.unsplash.com/photo-1533929736458-ca588d08c8be?w=300&h=200&fit=crop">
+                            <img src="https://images.pexels.com/photos/1388030/pexels-photo-1388030.jpeg?w=300&h=200&fit=crop"
+                                alt="Барселона">
                         </div>
                         <div class="content">
                             <h3>Барселона</h3>
@@ -256,10 +553,13 @@
                         </div>
                     </div>
                 </div>
+            
+                <!-- Токио -->
                 <div class="column">
                     <div class="ui fluid card">
                         <div class="image">
-                            <img src="https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=300&h=200&fit=crop">
+                            <img src="https://images.pexels.com/photos/2614818/pexels-photo-2614818.jpeg?w=300&h=200&fit=crop"
+                                alt="Токио">
                         </div>
                         <div class="content">
                             <h3>Токио</h3>
@@ -283,9 +583,6 @@
                     <div class="ui raised segment">
                         <div class="ui items">
                             <div class="item">
-                                <div class="ui mini circular image">
-                                    <img src="https://randomuser.me/api/portraits/women/1.jpg">
-                                </div>
                                 <div class="content">
                                     <p class="header">Анна</p>
                                     <div class="meta">Отдых в Париже</div>
@@ -300,9 +597,6 @@
                     <div class="ui raised segment">
                         <div class="ui items">
                             <div class="item">
-                                <div class="ui mini circular image">
-                                    <img src="https://randomuser.me/api/portraits/men/1.jpg">
-                                </div>
                                 <div class="content">
                                     <p class="header">Михаил</p>
                                     <div class="meta">Отдых в Риме</div>
@@ -317,9 +611,6 @@
                     <div class="ui raised segment">
                         <div class="ui items">
                             <div class="item">
-                                <div class="ui mini circular image">
-                                    <img src="https://randomuser.me/api/portraits/women/2.jpg">
-                                </div>
                                 <div class="content">
                                     <p class="header">Елена</p>
                                     <div class="meta">Отдых в Барселоне</div>
@@ -390,6 +681,18 @@
             $('.ui.rating').rating();
         });
     </script>
+
+    <!-- AOS анимации -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 50
+        });
+    </script>
+    
 </body>
 
 </html>
