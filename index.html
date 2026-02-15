@@ -806,83 +806,85 @@
                 }
             });
 
-            // Функция плавного скролла с улучшенной анимацией
+            // Функция плавного скролла
             function smoothScroll(target) {
                 if (target.length) {
                     $('html, body').stop().animate({
                         scrollTop: target.offset().top - 70
-                    }, {
-                        duration: 1000,
-                        easing: 'swing',
-                        complete: function () {
-                            // Добавляем подсветку цели
-                            target.css('transition', 'background-color 1s');
-                            target.css('background-color', 'rgba(199, 181, 166, 0.1)');
-                            setTimeout(function () {
-                                target.css('background-color', 'transparent');
-                            }, 1000);
-                        }
-                    });
+                    }, 800);
                 }
             }
 
-            // Функция плавного перехода между страницами
-            function smoothPageTransition(url) {
-                // Затемнение страницы
+            // Функция плавного перехода на 404
+            function goTo404() {
                 $('body').css({
-                    'transition': 'opacity 0.5s ease',
+                    'transition': 'opacity 0.3s ease',
                     'opacity': '0'
                 });
+                setTimeout(function () {
+                    window.location.href = '404.html';
+                }, 300);
+            }
 
-                // Небольшая задержка перед переходом
+            // Функция плавного перехода на другие страницы
+            function goToPage(url) {
+                $('body').css({
+                    'transition': 'opacity 0.3s ease',
+                    'opacity': '0'
+                });
                 setTimeout(function () {
                     window.location.href = url;
-                }, 500);
+                }, 300);
             }
 
-            // Предзагрузка страниц для более быстрого перехода
-            function preloadPage(url) {
-                var link = document.createElement('link');
-                link.rel = 'prerender';
-                link.href = url;
-                document.head.appendChild(link);
-            }
+            // Отключаем стандартное поведение для всех ссылок с #
+            $('a[href="#"]').on('click', function (e) {
+                e.preventDefault();
+                goTo404();
+            });
 
-            // Предзагружаем основные страницы
-            preloadPage('contacts.html');
-            preloadPage('faq.html');
-            preloadPage('404.html');
+            // Обработка битых ссылок с классом broken-link
+            $('.broken-link').on('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                goTo404();
+            });
+
+            // Обработка ссылок в футере (которые не являются рабочими)
+            $('.footer .inverted.link.list a').each(function () {
+                var href = $(this).attr('href');
+                // Если ссылка ведет на # или не является рабочей страницей
+                if (href === '#' || (href !== 'index.html' &&
+                    href !== 'index.html#catalog' &&
+                    href !== 'index.html#how-it-works' &&
+                    href !== 'index.html#reviews' &&
+                    href !== 'contacts.html' &&
+                    href !== 'faq.html')) {
+                    $(this).addClass('broken-link');
+                }
+            });
 
             // Обработка кликов по навигационным ссылкам
             $('.nav-link, .header.item, .footer-link').on('click', function (e) {
                 var href = $(this).attr('href');
-                var currentUrl = window.location.pathname.split('/').pop() || 'index.html';
 
-                // Если это ссылка на другую HTML страницу - плавный переход
-                if (href === 'contacts.html' || href === 'faq.html' || href === 'index.html' || href === '404.html') {
+                // Если это ссылка с классом broken-link
+                if ($(this).hasClass('broken-link')) {
                     e.preventDefault();
+                    goTo404();
+                    return;
+                }
 
-                    // Если уже на этой странице, просто скроллим вверх
-                    if (href === currentUrl || (href === 'index.html' && currentUrl === 'index.html')) {
-                        $('html, body').stop().animate({
-                            scrollTop: 0
-                        }, 1000);
-                        return;
-                    }
-
-                    smoothPageTransition(href);
+                // Если это ссылка на другую HTML страницу
+                if (href === 'contacts.html' || href === 'faq.html' || href === 'index.html') {
+                    e.preventDefault();
+                    goToPage(href);
                     return;
                 }
 
                 // Если это ссылка с якорем на этой же странице
                 if (href.includes('#')) {
                     e.preventDefault();
-
-                    // Если это ссылка на главную с якорем и мы не на главной
-                    if (href.startsWith('index.html#') && currentUrl !== 'index.html') {
-                        smoothPageTransition(href);
-                        return;
-                    }
 
                     // Обработка якорей на текущей странице
                     var anchor = href.split('#')[1];
@@ -891,93 +893,34 @@
                     if (targetElement.length) {
                         smoothScroll(targetElement);
                     } else {
-                        // Если элемента нет, но это якорь на этой странице
-                        console.log('Элемент не найден: ' + anchor);
+                        // Если элемента нет, но это якорь на главную
+                        if (href === 'index.html#catalog' ||
+                            href === 'index.html#how-it-works' ||
+                            href === 'index.html#reviews') {
+                            window.location.href = href;
+                        }
                     }
                 }
             });
 
-            // Плавный переход при загрузке страницы (появление)
-            $('body').css('opacity', '0');
-            $('body').animate({
-                opacity: 1
-            }, 800);
-
-            // Обработка битых ссылок - перенаправление на 404 с анимацией
-            $('.broken-link, a[href="#"]:not(.nav-link):not(.header.item):not(#login-btn)').on('click', function (e) {
+            // Обработка кнопки "Войти"
+            $('#login-btn').on('click', function (e) {
                 e.preventDefault();
-
-                // Анимируем "дрожание" ссылки
-                $(this).css({
-                    'transform': 'translateX(5px)',
-                    'transition': 'transform 0.1s ease'
-                });
-
-                setTimeout(() => {
-                    $(this).css('transform', 'translateX(-5px)');
-                }, 100);
-
-                setTimeout(() => {
-                    $(this).css('transform', 'translateX(0)');
-                }, 200);
-
-                // Плавный переход на 404
-                smoothPageTransition('404.html');
+                alert('Форма входа будет доступна в следующей версии.');
             });
 
-            // Обработка поиска с анимацией
+            // Обработка поиска
             $('#search-icon, #search-icon *').on('click keypress', function (e) {
                 if (e.type === 'keypress' && e.key !== 'Enter' && e.key !== ' ') return;
                 e.preventDefault();
-
                 var searchQuery = $('#search-input').val();
-
-                // Анимация иконки поиска
-                $(this).css({
-                    'transform': 'scale(1.2)',
-                    'transition': 'transform 0.2s ease'
-                });
-
-                setTimeout(() => {
-                    $(this).css('transform', 'scale(1)');
-                }, 200);
-
                 if (searchQuery.trim() !== '') {
-                    // Анимация успешного поиска
-                    $('#search-input').css({
-                        'border-color': '#21ba45',
-                        'transition': 'border-color 0.3s ease'
-                    });
-
-                    setTimeout(() => {
-                        $('#search-input').css('border-color', '');
-                    }, 1000);
-
                     alert('Поиск: ' + searchQuery + '\nНайдено 15 вариантов жилья по вашему запросу.');
                 } else {
-                    // Анимация ошибки
-                    $('#search-input').css({
-                        'border-color': '#db2828',
-                        'transition': 'border-color 0.3s ease'
-                    });
-
-                    $('#search-input').animate({
-                        marginLeft: '+=10'
-                    }, 100).animate({
-                        marginLeft: '-=20'
-                    }, 100).animate({
-                        marginLeft: '+=10'
-                    }, 100);
-
-                    setTimeout(() => {
-                        $('#search-input').css('border-color', '');
-                    }, 1000);
-
                     alert('Пожалуйста, введите запрос для поиска.');
                 }
             });
 
-            // Обработка Enter в поле поиска
             $('#search-input').on('keypress', function (e) {
                 if (e.key === 'Enter') {
                     e.preventDefault();
@@ -985,50 +928,19 @@
                 }
             });
 
-            // Обработка кнопок "Посмотреть варианты" с анимацией
+            // Обработка кнопок "Посмотреть варианты"
             $('.view-offers').on('click', function (e) {
                 e.preventDefault();
                 var city = $(this).data('city');
-
-                // Анимация кнопки
-                $(this).css({
-                    'transform': 'scale(0.95)',
-                    'transition': 'transform 0.1s ease'
-                });
-
-                setTimeout(() => {
-                    $(this).css('transform', 'scale(1)');
-                }, 100);
-
-                // Плавный переход к каталогу
-                setTimeout(() => {
-                    window.location.href = 'index.html#catalog';
-                }, 200);
+                alert('Открываю варианты жилья в ' + city + '...\nДоступно 24 предложения.');
+                window.location.href = 'index.html#catalog';
             });
 
-            // Обработка кнопки "Войти"
-            $('#login-btn').on('click', function (e) {
-                e.preventDefault();
-
-                // Анимация кнопки
-                $(this).css({
-                    'transform': 'scale(0.95)',
-                    'transition': 'transform 0.1s ease'
-                });
-
-                setTimeout(() => {
-                    $(this).css('transform', 'scale(1)');
-                }, 100);
-
-                alert('Форма входа будет доступна в следующей версии.');
-            });
-
-            // Мобильное меню с анимацией
+            // Мобильное меню
             if ($('.mobile-menu-button').length === 0) {
                 var menuButton = $('<div class="mobile-menu-button item"><i class="bars icon"></i></div>');
                 $('.ui.fixed.menu .ui.container').append(menuButton);
 
-                // Создаем правильные ссылки для мобильного меню
                 var mobileMenuItems = `
                     <a href="index.html" class="item">Главная</a>
                     <a href="index.html#catalog" class="item">Каталог</a>
@@ -1043,65 +955,25 @@
                 $('body').append(mobileMenu);
 
                 menuButton.on('click', function () {
-                    // Анимация бургер-меню
-                    $(this).find('i').toggleClass('rotate');
-                    mobileMenu.slideToggle(300);
+                    mobileMenu.slideToggle(200);
                 });
 
                 mobileMenu.on('click', 'a', function (e) {
                     e.preventDefault();
                     var href = $(this).attr('href');
+                    mobileMenu.slideUp(200);
 
-                    // Анимация кликнутого пункта
-                    $(this).css({
-                        'background-color': 'rgba(199, 181, 166, 0.2)',
-                        'transition': 'background-color 0.2s ease'
-                    });
-
-                    setTimeout(() => {
-                        $(this).css('background-color', '');
-                    }, 200);
-
-                    // Закрываем меню с анимацией
-                    mobileMenu.slideUp(300, function () {
-                        if (href === 'contacts.html' || href === 'faq.html') {
-                            smoothPageTransition(href);
-                        } else if (href === 'index.html') {
-                            smoothPageTransition(href);
-                        } else if (href.includes('#')) {
-                            window.location.href = href;
-                        }
-                    });
+                    if (href === 'contacts.html' || href === 'faq.html' || href === 'index.html') {
+                        goToPage(href);
+                    } else if (href.includes('#')) {
+                        window.location.href = href;
+                    }
                 });
             }
 
-            // Добавляем CSS для анимаций
-            $('<style>')
-                .prop('type', 'text/css')
-                .html(`
-                    .rotate {
-                        transform: rotate(90deg);
-                        transition: transform 0.3s ease;
-                    }
-                    
-                    .nav-link, .header.item, .footer-link, .view-offers, #login-btn {
-                        transition: all 0.3s ease !important;
-                    }
-                    
-                    .nav-link:hover, .header.item:hover, .footer-link:hover {
-                        transform: translateY(-2px);
-                    }
-                    
-                    @keyframes fadeIn {
-                        from { opacity: 0; transform: translateY(20px); }
-                        to { opacity: 1; transform: translateY(0); }
-                    }
-                    
-                    .fade-in {
-                        animation: fadeIn 0.8s ease forwards;
-                    }
-                `)
-                .appendTo('head');
+            // Плавное появление страницы
+            $('body').css('opacity', '0');
+            $('body').animate({ opacity: 1 }, 500);
 
             // Обновляем при изменении размера окна
             $(window).on('resize', function () {
