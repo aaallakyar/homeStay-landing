@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>HomeStay | FAQ</title>
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Fomantic UI Core CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.9.3/dist/semantic.min.css">
+
+    <!-- jQuery -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
+
+    <!-- Fomantic UI JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.9.3/dist/semantic.min.js"></script>
+
+    <!-- AOS анимации -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --pastel-lavender: #e2d1ff;
+            --pastel-mint: #d4f0f0;
+            --pastel-peach: #ffe6d5;
+            --pastel-rose: #fde2e4;
+            --pastel-sage: #e1e9d7;
+            --pastel-blue: #d4e2f0;
+            --primary-pastel: #c7b5a6;
+            --primary-pastel-dark: #b8a89a;
+            --text-dark: #2c2c2c;
+            --text-bright: #3a3a3a;
+            --text-soft: #5e5e5e;
+            --text-light: #7e7e7e;
+            --bg-soft: #faf7f2;
+        }
+
+        * {
+            scroll-behavior: smooth;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-soft);
+            font-family: 'Inter', sans-serif;
+            color: var(--text-bright);
+            overflow-x: hidden;
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        h1,
+        h2,
+        h3,
+        .ui.header {
+            font-family: 'Playfair Display', serif !important;
+            font-weight: 500 !important;
+            letter-spacing: -0.02em;
+            color: var(--text-dark) !important;
+        }
+
+        .main-content {
+            flex: 1;
+            margin-top: 100px;
+            margin-bottom: 50px;
+        }
+
+        .ui.fixed.menu {
+            background: rgba(250, 247, 242, 0.98) !important;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: none !important;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05) !important;
+            z-index: 1000;
+        }
+
+        .ui.fixed.menu .item.active {
+            background: rgba(199, 181, 166, 0.1) !important;
+            color: var(--primary-pastel-dark) !important;
+            font-weight: 600 !important;
+        }
+
+        .footer {
+            background: #e8ddd0 !important;
+            margin-top: auto !important;
+            padding: 60px 0 30px !important;
+            border-radius: 40px 40px 0 0 !important;
+            width: 100%;
+        }
+
+        /* Стили для FAQ секций */
+        .faq-category {
+            margin-bottom: 40px;
+        }
+
+        .faq-category h2 {
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary-pastel);
+        }
+
+        .ui.styled.accordion {
+            width: 100% !important;
+            border-radius: 16px !important;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.02) !important;
+        }
+
+        .ui.styled.accordion .title {
+            font-family: 'Inter', sans-serif !important;
+            font-weight: 500 !important;
+            color: var(--text-dark) !important;
+            padding: 1.5rem !important;
+            border-bottom: 1px solid rgba(199, 181, 166, 0.2) !important;
+        }
+
+        .ui.styled.accordion .active.title {
+            background: rgba(199, 181, 166, 0.1) !important;
+            color: var(--primary-pastel-dark) !important;
+        }
+
+        .ui.styled.accordion .content {
+            font-family: 'Inter', sans-serif !important;
+            padding: 1.5rem !important;
+            background: white !important;
+            line-height: 1.6 !important;
+        }
+
+        .ui.styled.accordion .content p {
+            margin-bottom: 10px;
+        }
+
+        .search-faq {
+            background: white;
+            border-radius: 50px;
+            padding: 20px 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+            margin-bottom: 30px;
+        }
+
+        @media only screen and (max-width: 767px) {
+            .main-content {
+                margin-top: 80px;
+                padding: 0 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Хедер с навигацией -->
+    <div class="ui fixed borderless menu">
+        <div class="ui container">
+            <a href="index.html" class="header item" aria-label="На главную">
+                <i class="home big icon" style="color: #2185d0;"></i>
+                <span style="font-weight: bold; font-size: 1.2rem;">HomeStay</span>
+            </a>
+            <a href="index.html" class="item">Главная</a>
+            <a href="index.html#catalog" class="item">Каталог</a>
+            <a href="index.html#how-it-works" class="item">Как это работает</a>
+            <a href="index.html#reviews" class="item">Отзывы</a>
+            <a href="contacts.html" class="item">Контакты</a>
+            <a href="faq.html" class="item active">FAQ</a>
+
+            <div class="right menu">
+                <a href="#" class="ui item" id="login-btn">
+                    <i class="user outline icon"></i> Войти
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Основной контент -->
+    <div class="main-content">
+        <div class="ui container">
+
+            <!-- Заголовок страницы -->
+            <div class="ui center aligned basic segment" data-aos="fade-down">
+                <h1 class="ui header" style="font-size: 2.5rem;">
+                    <i class="question circle outline icon" style="color: #2185d0;"></i>
+                    <div class="content">
+                        Часто задаваемые вопросы
+                        <div class="sub header">Найдите ответы на популярные вопросы о сервисе</div>
+                    </div>
+                </h1>
+            </div>
+
+            <!-- Поиск по FAQ -->
+            <div class="search-faq" data-aos="fade-up">
+                <div class="ui huge fluid icon input">
+                    <input type="text" id="faqSearch" placeholder="Поиск по вопросам...">
+                    <i class="search icon"></i>
+                </div>
+                <p class="meta" style="margin-top: 10px;">Введите ключевое слово для поиска по всем вопросам</p>
+            </div>
+
+            <!-- Категория: Общие вопросы -->
+            <div class="faq-category" data-aos="fade-up">
+                <h2 class="ui header">
+                    <i class="info circle icon" style="color: #2185d0;"></i>
+                    <div class="content">Общие вопросы</div>
+                </h2>
+
+                <div class="ui styled fluid accordion">
+                    <div class="active title">
+                        <i class="dropdown icon"></i>
+                        Как начать пользоваться сервисом HomeStay?
+                    </div>
+                    <div class="active content">
+                        <p>Чтобы начать пользоваться сервисом:</p>
+                        <ol style="margin-left: 20px;">
+                            <li>Зарегистрируйтесь на сайте, нажав кнопку "Войти" в правом верхнем углу</li>
+                            <li>Подтвердите email (на указанную почту придет письмо)</li>
+                            <li>Заполните профиль (можно добавить фото и контактные данные)</li>
+                            <li>Начните поиск жилья через каталог или строку поиска</li>
+                        </ol>
+                        <p class="meta">Все функции доступны сразу после регистрации.</p>
+                    </div>
+
+                    <div class="title">
+                        <i class="dropdown icon"></i>
+                        Есть ли мобильное приложение?
+                    </div>
+                    <div class="content">
+                        <p>Да, наше приложение доступно в двух версиях:</p>
+                        <div class="ui bulleted list">
+                            <div class="item"><strong>iOS:</strong> App Store (iPhone и iPad)</div>
+                            <div class="item"><strong>Android:</strong> Google Play</div>
+                        </div>
+                        <p>Все функции синхронизируются между веб-версией и приложением. Вы можете начать поиск на
+                            компьютере, а завершить бронирование в телефоне.</p>
+                    </div>
+
+                    <div class="title">
+                        <i class="dropdown icon"></i>
+                        Сколько стоит использование сервиса?
+                    </div>
+                    <div class="content">
+                        <p>Для путешественников использование сервиса <strong>бесплатно</strong>. Вы платите только за
+                            аренду жилья напрямую хозяину или через безопасную сделку.</p>
+                        <p>Для хозяев жилья действует комиссия 5-10% в зависимости от тарифа.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Категория: Бронирование и оплата -->
+            <div class="faq-category" data-aos="fade-up" data-aos-delay="100">
+                <h2 class="ui header">
+                    <i class="credit card icon" style="color: #21ba45;"></i>
+                    <div class="content">Бронирование и оплата</div>
+                </h2>
+
+                <div class="ui styled fluid accordion">
+                    <div class="title">
+                        <i class="dropdown icon"></i>
+                        Как происходит бронирование?
+                    </div>
+                    <div class="content">
+                        <p>Процесс бронирования состоит из нескольких шагов:</p>
+                        <div class="ui ordered list">
+                            <div class="item">Выбираете понравившееся жилье в каталоге</div>
+                            <div class="item">Указываете даты заезда и выезда, количество гостей</div>
+                            <div class="item">Нажимаете "Забронировать"</div>
+                            <div class="item">Оплачиваете бронирование (полностью или частично)</div>
+                            <div class="item">Получаете подтверждение на email</div>
+                        </div>
+                    </div>
+
+                    <div class="title">
+                        <i class="dropdown icon"></i>
+                        Какие способы оплаты принимаются?
+                    </div>
+                    <div class="content">
+                        <p>Мы принимаем следующие способы оплаты:</p>
+                        <div class="ui list">
+                            <div class="item"><i class="cc visa icon"></i> Visa</div>
+                            <div class="item"><i class="cc mastercard icon"></i> Mastercard</div>
+                            <div class="item"><i class="cc mir icon"></i> МИР</div>
+                            <div class="item"><i class="apple icon"></i> Apple Pay</div>
+                            <div class="item"><i class="google icon"></i> Google Pay</div>
+                            <div class="item"><i class="money bill alternate icon"></i> Наличные при заселении (только с
+                                согласия хозяина)</div>
+                        </div>
+                    </div>
+
+                    <div class="title">
+                        <i class="dropdown icon"></i>
+                        Можно ли отменить бронирование и вернуть деньги?
+                    </div>
+                    <div class="content">
+                        <p>Да, возможность отмены зависит от условий конкретного объявления. Существуют три типа отмены:
+                        </p>
+                        <table class="ui celled table">
+                            <thead>
+                                <tr>
+                                    <th>Тип</th>
+                                    <th>Условия возврата</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Гибкая</td>
+                                    <td>Полный возврат до 7 дней до заезда, далее - частичный</td>
+                                </tr>
+                                <tr>
+                                    <td>Умеренная</td>
+                                    <td>Полный возврат до 14 дней до заезда</td>
+                                </tr>
+                                <tr>
+                                    <td>Строгая</td>
+                                    <td>Возврат 50% до 30 дней до заезда</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p>Детальные условия всегда указаны в карточке жилья.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Категория: Безопасность -->
+            <div class="faq-category" data-aos="fade-up" data-aos-delay="200">
+                <h2 class="ui header">
+                    <i class="shield alternate icon" style="color: #db2828;"></i>
+                    <div class="content">Безопасность и гарантии</div>
+                </h2>
+
+                <div class="ui styled fluid accordion">
+                    <div class="title">
+                        <i class="dropdown icon"></i>
+                        Как вы проверяете объявления?
+                    </div>
+                    <div class="content">
+                        <p>Каждое объявление проходит многоступенчатую проверку:</p>
+                        <ul>
+                            <li><strong>Автоматическая проверка:</strong> анализ фотографий, описания, цен</li>
+                            <li><strong>Ручная проверка:</strong> наши менеджеры связываются с хозяевами</li>
+                            <li><strong>Верификация документов:</strong> проверка паспортных данных</li>
+                            <li><strong>Отзывы гостей:</strong> система рейтингов и реальные отзывы</li>
+                        </ul>
+                    </div>
+
+                    <div class="title">
+                        <i class="dropdown icon"></i>
+                        Что такое гарантия заселения?
+                    </div>
+                    <div class="content">
+                        <p>Гарантия заселения означает, что в случае проблем при заселении (жилье не соответствует
+                            описанию, хозяин не встречает) мы:</p>
+                        <div class="ui bulleted list">
+                            <div class="item">Найдем альтернативное жилье в течение 2 часов</div>
+                            <div class="item">Вернем деньги в двойном размере, если не сможем найти замену</div>
+                        </div>
+                        <p class="ui warning message">
+                            <i class="info circle icon"></i>
+                            Для активации гарантии необходимо обратиться в поддержку в течение 24 часов с момента
+                            заселения.
+                        </p>
+                    </div>
+
+                    <div class="title">
+                        <i class="dropdown icon"></i>
+                        Безопасны ли мои платежные данные?
+                    </div>
+                    <div class="content">
+                        <p>Да, мы используем современные протоколы безопасности:</p>
+                        <ul>
+                            <li>Все данные передаются по защищенному протоколу HTTPS с шифрованием 256-bit</li>
+                            <li>Платежи обрабатываются через сертифицированных партнеров (соответствие PCI DSS)</li>
+                            <li>Мы не храним данные ваших карт на своих серверах</li>
+                            <li>Двухфакторная аутентификация для дополнительной защиты аккаунта</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Категория: Технические вопросы -->
+            <div class="faq-category" data-aos="fade-up" data-aos-delay="300">
+                <h2 class="ui header">
+                    <i class="cog icon" style="color: #fbbd08;"></i>
+                    <div class="content">Технические вопросы</div>
+                </h2>
+
+                <div class="ui styled fluid accordion">
+                    <div class="title">
+                        <i class="dropdown icon"></i>
+                        Не приходит письмо с подтверждением. Что делать?
+                    </div>
+                    <div class="content">
+                        <p>Если вы не получили письмо с подтверждением регистрации:</p>
+                        <ol>
+                            <li>Проверьте папку "Спам" или "Промоакции"</li>
+                            <li>Подождите 5-10 минут (письма иногда идут с задержкой)</li>
+                            <li>Убедитесь, что ввели правильный email при регистрации</li>
+                            <li>Попробуйте отправить письмо повторно (кнопка "Отправить повторно" на странице
+                                подтверждения)</li>
+                        </ol>
+                        <p>Если ничего не помогло, напишите в поддержку support@homestay.ru</p>
+                    </div>
+
+                    <div class="title">
+                        <i class="dropdown icon"></i>
+                        Не работает поиск или фильтры
+                    </div>
+                    <div class="content">
+                        <p>Попробуйте следующие решения:</p>
+                        <ul>
+                            <li>Обновите страницу (F5 или Cmd+R)</li>
+                            <li>Очистите кэш браузера</li>
+                            <li>Попробуйте другой браузер (рекомендуем Chrome, Firefox, Safari последних версий)</li>
+                            <li>Отключите блокировщики рекламы временно</li>
+                        </ul>
+                        <p>Если проблема сохраняется, сообщите нам в поддержку с указанием:</p>
+                        <ul>
+                            <li>Браузера и его версии</li>
+                            <li>Операционной системы</li>
+                            <li>Скриншота проблемы</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Блок "Не нашли ответ?" -->
+            <div class="ui raised segment" data-aos="fade-up" style="text-align: center; margin-top: 40px;">
+                <h3 class="ui header">
+                    <i class="help circle icon"></i>
+                    Не нашли ответ на свой вопрос?
+                </h3>
+                <p>Напишите нам, и мы поможем лично!</p>
+                <a href="contacts.html" class="ui primary button">
+                    <i class="envelope icon"></i>
+                    Связаться с поддержкой
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Футер (такой же как в contacts.html) -->
+    <div class="footer">
+        <div class="ui container">
+            <div class="ui inverted stackable three column grid">
+                <div class="column">
+                    <h4 class="ui inverted header">HomeStay</h4>
+                    <div class="ui inverted link list">
+                        <a href="index.html" class="item">О нас</a>
+                        <a href="index.html#how-it-works" class="item">Как это работает</a>
+                        <a href="faq.html" class="item">FAQ</a>
+                        <a href="#" class="item">Блог</a>
+                    </div>
+                </div>
+                <div class="column">
+                    <h4 class="ui inverted header">Для партнеров</h4>
+                    <div class="ui inverted link list">
+                        <a href="#" class="item">Стать хозяином</a>
+                        <a href="#" class="item">Правила размещения</a>
+                        <a href="#" class="item">Программа лояльности</a>
+                        <a href="contacts.html" class="item">Поддержка</a>
+                    </div>
+                </div>
+                <div class="column">
+                    <h4 class="ui inverted header">Контакты</h4>
+                    <div class="ui inverted list">
+                        <div class="item">
+                            <i class="phone icon"></i> 8 (800) 123-45-67
+                        </div>
+                        <div class="item">
+                            <i class="envelope icon"></i> support@homestay.ru
+                        </div>
+                        <div class="item">
+                            <i class="map marker icon"></i> Москва, ул. Тверская, 1
+                        </div>
+                    </div>
+                    <div class="ui inverted horizontal list">
+                        <a href="#" class="item"><i class="telegram large icon"></i></a>
+                        <a href="#" class="item"><i class="vk large icon"></i></a>
+                        <a href="#" class="item"><i class="instagram large icon"></i></a>
+                        <a href="#" class="item"><i class="youtube large icon"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="ui inverted divider"></div>
+            <div class="ui inverted center aligned segment" style="background: transparent;">
+                <p>© 2026 HomeStay. Все права защищены.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Скрипты -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Инициализация AOS
+            AOS.init({
+                duration: 800,
+                once: true
+            });
+
+            // Инициализация аккордеона (используем знания из лекции)
+            $('.ui.accordion').accordion({
+                selector: {
+                    trigger: '.title'
+                }
+            });
+
+            // Функция поиска по FAQ (используем знания из лекции о функциях)
+            $('#faqSearch').on('keyup', function () {
+                let searchTerm = $(this).val().toLowerCase();
+
+                // Используем цикл для перебора элементов (из лекции)
+                $('.ui.accordion .title').each(function () {
+                    let question = $(this).text().toLowerCase();
+                    let content = $(this).next('.content').text().toLowerCase();
+
+                    // Используем условное ветвление (из лекции)
+                    if (question.includes(searchTerm) || content.includes(searchTerm)) {
+                        $(this).css('background', 'rgba(199, 181, 166, 0.1)');
+                    } else {
+                        $(this).css('background', '');
+                    }
+                });
+
+                // Показываем количество результатов (используем шаблонные строки из лекции)
+                let visibleCount = $('.ui.accordion .title[style*="background"]').length;
+                if (searchTerm.length > 0) {
+                    console.log(`Найдено ${visibleCount} вопросов по запросу "${searchTerm}"`);
+                }
+            });
+
+            // Обработка входа
+            $('#login-btn').on('click', function (e) {
+                e.preventDefault();
+                alert('Форма входа будет доступна в следующей версии.');
+            });
+
+            // Обработка ссылок с "#"
+            $('a[href="#"]').on('click', function (e) {
+                e.preventDefault();
+                alert('Этот раздел находится в разработке.');
+            });
+        });
+    </script>
+</body>
+
+</html>
