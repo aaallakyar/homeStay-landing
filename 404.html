@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>404 - Страница не найдена | HomeStay</title>
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Fomantic UI Core CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.9.3/dist/semantic.min.css">
+
+    <!-- jQuery -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
+
+    <!-- Fomantic UI JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.9.3/dist/semantic.min.js"></script>
+
+    <style>
+        :root {
+            --pastel-lavender: #e2d1ff;
+            --pastel-mint: #d4f0f0;
+            --pastel-peach: #ffe6d5;
+            --pastel-rose: #fde2e4;
+            --pastel-sage: #e1e9d7;
+            --pastel-blue: #d4e2f0;
+            --primary-pastel: #c7b5a6;
+            --primary-pastel-dark: #b8a89a;
+            --text-dark: #2c2c2c;
+            --text-bright: #3a3a3a;
+            --text-soft: #5e5e5e;
+            --bg-soft: #faf7f2;
+        }
+
+        * {
+            scroll-behavior: smooth;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-soft);
+            font-family: 'Inter', sans-serif;
+            color: var(--text-bright);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+        }
+
+        .error-container {
+            text-align: center;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .error-code {
+            font-family: 'Playfair Display', serif;
+            font-size: 12rem;
+            font-weight: 600;
+            line-height: 1;
+            background: linear-gradient(135deg, var(--primary-pastel) 0%, var(--primary-pastel-dark) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .error-title {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+
+        .error-message {
+            font-size: 1.1rem;
+            color: var(--text-soft);
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .error-actions {
+            margin: 40px 0;
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .ui.primary.button {
+            background-color: var(--primary-pastel) !important;
+            color: white !important;
+            border-radius: 40px !important;
+            padding: 1.2rem 2.5rem !important;
+            font-weight: 500 !important;
+            transition: all 0.3s ease !important;
+        }
+
+        .ui.primary.button:hover {
+            background-color: var(--primary-pastel-dark) !important;
+            transform: translateY(-2px);
+        }
+
+        .ui.basic.button {
+            border: 1px solid var(--primary-pastel) !important;
+            color: var(--primary-pastel-dark) !important;
+            background: transparent !important;
+            border-radius: 40px !important;
+            padding: 1.2rem 2.5rem !important;
+            font-weight: 500 !important;
+            transition: all 0.3s ease !important;
+        }
+
+        .ui.basic.button:hover {
+            background: var(--primary-pastel) !important;
+            color: white !important;
+        }
+
+        .search-section {
+            background: white;
+            border-radius: 50px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            margin: 30px 0;
+        }
+
+        .popular-links {
+            margin-top: 30px;
+        }
+
+        .popular-links a {
+            color: var(--text-soft);
+            margin: 0 15px;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .popular-links a:hover {
+            color: var(--primary-pastel-dark);
+            text-decoration: underline;
+        }
+
+        .fun-fact {
+            margin-top: 40px;
+            padding: 20px;
+            background: linear-gradient(145deg, #e8ddd0 0%, #f5ede5 100%);
+            border-radius: 20px;
+            font-style: italic;
+        }
+
+        @media only screen and (max-width: 767px) {
+            .error-code {
+                font-size: 8rem;
+            }
+
+            .error-title {
+                font-size: 1.5rem;
+            }
+
+            .error-actions {
+                flex-direction: column;
+            }
+
+            .ui.button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="error-container">
+        <!-- Анимированная 404 -->
+        <div class="error-code" data-aos="zoom-in">404</div>
+
+        <h1 class="error-title" data-aos="fade-up">Ой! Страница не найдена</h1>
+
+        <p class="error-message" data-aos="fade-up" data-aos-delay="100">
+            Возможно, эта страница была удалена, перемещена или никогда не существовала.
+            Но не волнуйтесь, у нас есть много отличных предложений по аренде жилья!
+        </p>
+
+        <!-- Анимированные домики (простая CSS анимация) -->
+        <div style="margin: 30px 0; display: flex; justify-content: center; gap: 10px;">
+            <i class="huge home icon" style="color: var(--primary-pastel); animation: bounce 2s infinite;"></i>
+            <i class="huge building icon" style="color: var(--primary-pastel); animation: bounce 2s infinite 0.3s;"></i>
+            <i class="huge hotel icon" style="color: var(--primary-pastel); animation: bounce 2s infinite 0.6s;"></i>
+        </div>
+
+        <!-- Кнопки действий -->
+        <div class="error-actions" data-aos="fade-up" data-aos-delay="200">
+            <a href="index.html" class="ui primary button">
+                <i class="home icon"></i>
+                На главную
+            </a>
+            <a href="index.html#catalog" class="ui basic button">
+                <i class="search icon"></i>
+                Искать жилье
+            </a>
+            <a href="contacts.html" class="ui basic button">
+                <i class="envelope icon"></i>
+                Связаться с нами
+            </a>
+        </div>
+
+        <!-- Поиск (интерактивный элемент) -->
+        <div class="search-section" data-aos="fade-up" data-aos-delay="300">
+            <h3 class="ui header">
+                <i class="search icon"></i>
+                Может быть, найдете что-то другое?
+            </h3>
+            <div class="ui fluid action input">
+                <input type="text" id="search404" placeholder="Поиск жилья, например: Париж, Рим, Токио...">
+                <button class="ui button" id="searchBtn404" style="background: var(--primary-pastel); color: white;">
+                    <i class="search icon"></i> Найти
+                </button>
+            </div>
+        </div>
+
+        <!-- Популярные направления -->
+        <div class="popular-links" data-aos="fade-up" data-aos-delay="400">
+            <p style="margin-bottom: 15px; color: var(--text-soft);">Популярные направления:</p>
+            <div>
+                <a href="index.html#catalog">Париж</a>
+                <a href="index.html#catalog">Рим</a>
+                <a href="index.html#catalog">Барселона</a>
+                <a href="index.html#catalog">Токио</a>
+                <a href="index.html#catalog">Нью-Йорк</a>
+                <a href="index.html#catalog">Лондон</a>
+            </div>
+        </div>
+
+        <!-- Забавный факт -->
+        <div class="fun-fact" data-aos="fade-up" data-aos-delay="500">
+            <i class="lightbulb outline icon"></i>
+            <span id="funFact">Знаете ли вы? Самое популярное жилье на HomeStay находится в Париже!</span>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Инициализация AOS
+            AOS.init({
+                duration: 800,
+                once: true
+            });
+
+            // Массив забавных фактов для рандомизации (используем массив из лекции)
+            const funFacts = [
+                "Самое популярное жилье на HomeStay находится в Париже!",
+                "Более 50 000 путешественников оставили отзывы в этом году!",
+                "Средняя оценка нашего жилья — 4.8 из 5!",
+                "У нас есть жилье в 50 странах мира!",
+                "95% гостей готовы вернуться и бронировать снова!",
+                "Самый необычный объект — дом на дереве в Сочи!",
+                "Каждую минуту бронируется 3 объекта на HomeStay!"
+            ];
+
+            // Функция для получения случайного факта (используем знания из лекции)
+            function getRandomFact() {
+                // Math.random() из лекции
+                let randomIndex = Math.floor(Math.random() * funFacts.length);
+                return funFacts[randomIndex];
+            }
+
+            // Обновляем факт при загрузке
+            $('#funFact').text(getRandomFact());
+
+            // Меняем факт каждые 5 секунд
+            setInterval(function () {
+                $('#funFact').fadeOut(500, function () {
+                    $(this).text(getRandomFact()).fadeIn(500);
+                });
+            }, 5000);
+
+            // Обработка поиска с 404 страницы
+            $('#searchBtn404, #search404').on('click keypress', function (e) {
+                if (e.type === 'keypress' && e.key !== 'Enter') return;
+
+                let query = $('#search404').val().trim();
+
+                if (query) {
+                    // Используем шаблонные строки (из лекции)
+                    alert(`🔍 Ищем жилье в "${query}"...\n\nПеренаправляем на страницу с результатами поиска.`);
+                    // Здесь можно добавить редирект на страницу поиска
+                    // window.location.href = `search.html?q=${encodeURIComponent(query)}`;
+                } else {
+                    alert('Пожалуйста, введите город или направление для поиска.');
+                }
+            });
+
+            // Дополнительный интерактив: при клике на домики
+            $('.home.icon, .building.icon, .hotel.icon').on('click', function () {
+                alert('🏠 Добро пожаловать домой! Переходим на главную страницу...');
+                window.location.href = 'index.html';
+            });
+
+            // Обработка популярных ссылок
+            $('.popular-links a').on('click', function (e) {
+                e.preventDefault();
+                let city = $(this).text();
+                alert(`🔍 Ищем жилье в ${city}...`);
+                window.location.href = 'index.html#catalog';
+            });
+
+            // Анимация при наведении
+            $('.popular-links a').hover(
+                function () { $(this).css('color', 'var(--primary-pastel-dark)'); },
+                function () { $(this).css('color', 'var(--text-soft)'); }
+            );
+        });
+    </script>
+</body>
+
+</html>
