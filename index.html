@@ -6,21 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HomeStay | Аренда жилья для отпуска</title>
 
-    <!-- Google Fonts для эстетики -->
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600&display=swap"
         rel="stylesheet">
     
-    <!-- Fomantic UI Core CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.9.3/dist/semantic.min.css">
 
-    <!-- jQuery (необходим для Fomantic UI JavaScript) -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
 
-    <!-- Fomantic UI JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.9.3/dist/semantic.min.js"></script>
 
-    <!-- Дополнительные стили (кастомизация) -->
     <style>
         :root {
             --pastel-lavender: #e2d1ff;
@@ -31,40 +26,37 @@
             --pastel-blue: #d4e2f0;
             --primary-pastel: #c7b5a6;
             --primary-pastel-dark: #b8a89a;
-            --text-dark: #2c2c2c;        /* Яркий темный текст */
-            --text-bright: #3a3a3a;       /* Яркий основной текст */
-            --text-soft: #5e5e5e;          /* Мягкий для второстепенного */
-            --text-light: #7e7e7e;         /* Светлый для мета-информации */
+            --text-dark: #2c2c2c;       
+            --text-bright: #3a3a3a;       
+            --text-soft: #5e5e5e;         
+            --text-light: #7e7e7e;       
             --bg-soft: #faf7f2;
         }
 
         body {
             background-color: var(--bg-soft);
             font-family: 'Inter', sans-serif;
-            color: var(--text-bright);    /* Яркий основной текст */
+            color: var(--text-bright);    
         }
 
         h1, h2, h3, .ui.header {
             font-family: 'Playfair Display', serif !important;
-            font-weight: 500 !important;   /* Чуть жирнее для яркости */
+            font-weight: 500 !important;   
             letter-spacing: -0.02em;
-            color: var(--text-dark) !important;  /* Самый темный для заголовков */
-        }
+            color: var(--text-dark) !important; 
 
         p, li, .content, .description {
-            color: var(--text-bright);     /* Яркий для читаемости */
+            color: var(--text-bright);     
         }
 
         .sub.header, .meta, .label {
-            color: var(--text-soft) !important;  /* Мягкий для второстепенного */
-        }
+            color: var(--text-soft) !important;  
 
         .main-container {
             margin-top: 20px;
             min-height: calc(100vh - 200px);
         }
 
-        /* Пастельный хедер с размытием */
         .ui.fixed.menu {
             background: rgba(250, 247, 242, 0.8) !important;
             backdrop-filter: blur(12px);
@@ -74,7 +66,7 @@
         }
 
         .ui.fixed.menu .item {
-            color: var(--text-bright) !important;  /* Яркий текст в меню */
+            color: var(--text-bright) !important;  
             transition: all 0.2s ease;
         }
 
@@ -83,7 +75,6 @@
             background: transparent !important;
         }
 
-        /* Пастельная hero-секция */
         .hero-section {
             background: linear-gradient(145deg, #e8ddd0 0%, #f5ede5 100%);
             color: var(--text-dark);
@@ -106,15 +97,13 @@
         }
 
         .hero-section h1 {
-            color: var(--text-dark) !important;  /* Самый яркий для заголовка */
-            font-weight: 600 !important;
+            color: var(--text-dark) !important;  
         }
 
         .hero-section .sub.header {
-            color: var(--text-bright) !important;  /* Яркий для подзаголовка */
+            color: var(--text-bright) !important;  
         }
 
-        /* Пастельные кнопки */
         .ui.primary.button {
             background-color: var(--primary-pastel) !important;
             color: #ffffff !important;
@@ -133,7 +122,7 @@
 
         .ui.basic.button {
             border: 1px solid var(--primary-pastel) !important;
-            color: var(--primary-pastel-dark) !important;  /* Темнее для контраста */
+            color: var(--primary-pastel-dark) !important;  
             border-radius: 40px !important;
             padding: 1.2rem 2.5rem !important;
             font-weight: 500 !important;
@@ -145,7 +134,6 @@
             color: white !important;
         }
 
-        /* Пастельные карточки */
         .ui.card, .ui.cards>.card {
             border: none !important;
             border-radius: 24px !important;
@@ -171,21 +159,19 @@
         }
 
         .ui.card .content h3 {
-            color: var(--text-dark) !important;  /* Яркий для заголовков карточек */
+            color: var(--text-dark) !important;  
         }
 
         .ui.card .content p {
-            color: var(--text-bright) !important;  /* Яркий для текста */
+            color: var(--text-bright) !important;  
         }
 
-        /* Пастельные иконки */
         .ui.card .content i.circular.icon {
             background-color: var(--pastel-lavender) !important;
-            color: var(--text-dark) !important;  /* Темный цвет иконок */
+            color: var(--text-dark) !important;  
             box-shadow: none !important;
         }
 
-        /* Статистика с яркими цифрами */
         .ui.statistic {
             text-align: center;
         }
@@ -193,7 +179,7 @@
         .ui.statistic>.value {
             font-family: 'Playfair Display', serif !important;
             font-size: 2.8rem !important;
-            color: var(--text-dark) !important;  /* Яркие цифры */
+            color: var(--text-dark) !important;  
             font-weight: 600 !important;
         }
 
@@ -212,20 +198,18 @@
             padding: 30px !important;
         }
 
-        /* Пастельные списки */
         .ui.list .item i.icon {
             color: var(--primary-pastel) !important;
         }
 
         .ui.list .item .content {
-            color: var(--text-bright) !important;  /* Яркий текст в списках */
+            color: var(--text-bright) !important;  
         }
 
         .ui.list .item strong {
-            color: var(--text-dark) !important;  /* Жирный текст ярче */
+            color: var(--text-dark) !important;  
         }
 
-        /* Пастельные заголовки секций */
         .ui.header {
             color: var(--text-dark) !important;
         }
@@ -242,7 +226,6 @@
             color: var(--text-soft) !important;
         }
 
-        /* Пастельные отзывы */
         .ui.raised.segment {
             background: white !important;
             border: 1px solid rgba(199, 181, 166, 0.15) !important;
@@ -262,20 +245,18 @@
         }
 
         .ui.raised.segment p {
-            color: var(--text-bright) !important;  /* Яркий текст отзыва */
+            color: var(--text-bright) !important;  
         }
 
         .ui.raised.segment .quote i.icon {
             color: var(--primary-pastel) !important;
         }
 
-        /* Пастельный рейтинг */
         .ui.rating .active.icon {
             color: var(--primary-pastel) !important;
             text-shadow: none !important;
         }
 
-        /* Пастельный футер */
         .footer {
             background: #e8ddd0 !important;
             margin-top: 80px !important;
@@ -288,7 +269,7 @@
         }
 
         .footer .ui.link.list .item {
-            color: var(--text-bright) !important;  /* Яркие ссылки в футере */
+            color: var(--text-bright) !important;  
         }
 
         .footer .ui.link.list .item:hover {
@@ -304,7 +285,7 @@
         }
 
         .footer .ui.horizontal.list .item i.icon {
-            color: var(--text-dark) !important;  /* Яркие иконки соцсетей */
+            color: var(--text-dark) !important;  
             transition: color 0.2s ease;
         }
 
@@ -312,7 +293,6 @@
             color: var(--primary-pastel-dark) !important;
         }
 
-        /* Декоративные элементы */
         .decorative-icon {
             position: absolute;
             font-size: 200px;
@@ -324,7 +304,6 @@
 </head>
 
 <body>
-    <!-- Хедер с навигацией -->
     <div class="ui fixed borderless menu">
         <div class="ui container">
             <a href="#" class="header item">
@@ -350,7 +329,6 @@
         </div>
     </div>
 
-    <!-- Hero-секция -->
     <div class="hero-section">
         <div class="ui container">
             <div class="ui stackable two column grid">
@@ -381,11 +359,8 @@
         </div>
     </div>
 
-    <!-- Основной контент -->
     <div class="main-container">
         <div class="ui container">
-    
-            <!-- Секция "О проекте" -->
             <div class="ui stackable two column grid" style="margin: 40px 0;">
                 <div class="column">
                     <h2 class="ui header">
@@ -454,7 +429,6 @@
                 </div>
             </div>
 
-            <!-- Секция преимуществ -->
             <h2 class="ui header" style="text-align: center; margin: 50px 0 30px;">
                 <i class="star icon" style="color: #fbbd08;"></i>
                 <div class="content">
@@ -491,16 +465,14 @@
                     </div>
                 </div>
             </div>
-            
-            <!-- Секция популярных направлений -->
+
             <h2 class="ui header" style="text-align: center; margin: 60px 0 30px;">
                 <i class="map marker alternate icon" style="color: #db2828;"></i>
                 <div class="content">
                     Популярные направления
                 </div>
             </h2>
-            
-            <!-- Секция популярных направлений -->
+
             <h2 class="ui header" style="text-align: center; margin: 60px 0 30px;">
                 <i class="map marker alternate icon" style="color: #db2828;"></i>
                 <div class="content">
@@ -569,8 +541,7 @@
                     </div>
                 </div>
             </div>
-            
-            <!-- Секция отзывов -->
+
             <h2 class="ui header" style="text-align: center; margin: 60px 0 30px;">
                 <i class="comment icon" style="color: #2185d0;"></i>
                 <div class="content">
@@ -625,7 +596,6 @@
         </div>
     </div>
 
-    <!-- Футер -->
     <div class="footer">
         <div class="ui container">
             <div class="ui inverted stackable three column grid">
@@ -674,15 +644,13 @@
             </div>
         </div>
     </div>
-    
-    <!-- Инициализация компонентов Fomantic UI -->
+
     <script>
         $(document).ready(function () {
             $('.ui.rating').rating();
         });
     </script>
 
-    <!-- AOS анимации -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
