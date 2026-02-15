@@ -391,63 +391,127 @@
     <!-- Скрипты -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        $(document).ready(function () {
-            // Инициализация AOS
-            AOS.init({
-                duration: 800,
-                once: true
-            });
-
-            // Инициализация выпадающего списка
-            $('select.dropdown').dropdown();
-
-            // Инициализация чекбокса
-            $('.ui.checkbox').checkbox();
-
-            // Обработка формы с использованием знаний из лекции
-            $('#feedbackForm').on('submit', function (e) {
-                e.preventDefault();
-
-                // Получаем значения полей (используем методы из лекции)
-                let name = $('#name').val();
-                let email = $('#email').val();
-                let topic = $('#topic').val();
-                let message = $('#message').val();
-                let consent = $('#consent').is(':checked');
-
-                // Валидация с использованием условных конструкций (из лекции)
-                if (!name || !email || !topic || !message || !consent) {
-                    $('.ui.error.message')
-                        .html('<i class="exclamation circle icon"></i> Пожалуйста, заполните все обязательные поля')
-                        .show();
-                    return;
-                }
-
-                // Валидация email с использованием регулярного выражения (из лекции)
-                let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                if (!emailPattern.test(email)) {
-                    $('.ui.error.message')
-                        .html('<i class="exclamation circle icon"></i> Пожалуйста, введите корректный email')
-                        .show();
-                    return;
-                }
-
-                // Если все хорошо, показываем успех
-                $('.ui.error.message').hide();
-
-                // Используем alert (из лекции)
-                alert(`Спасибо за обращение, ${name}!\n\nМы получили ваше сообщение по теме "${topic}" и ответим в ближайшее время.`);
-
-                // Очищаем форму
-                $('#feedbackForm')[0].reset();
-            });
-
-            // Обработка клика по кнопке входа (как в лекции)
-            $('#login-btn').on('click', function (e) {
-                e.preventDefault();
-                alert('Форма входа будет доступна в следующей версии.');
-            });
+    $(document).ready(function () {
+        // Инициализация рейтингов
+        $('.ui.rating').rating({
+            clearable: false
         });
+
+        // Инициализация AOS
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 50,
+            disable: function () {
+                return window.innerWidth < 768;
+            }
+        });
+
+        // Функция плавного скролла
+        function smoothScroll(target) {
+            if (target.length) {
+                $('html, body').animate({
+                    scrollTop: target.offset().top - 70
+                }, 600);
+            }
+        }
+
+        // Обработка кликов по навигационным ссылкам
+        $('.nav-link, .header.item, .footer-link').on('click', function (e) {
+            var href = $(this).attr('href');
+            
+            // Если это ссылка на другую страницу
+            if (href.includes('.html')) {
+                // Просто переходим по ссылке (не отменяем стандартное поведение)
+                return true;
+            }
+            
+            // Если это якорь на этой странице
+            e.preventDefault();
+            if (href === '#home' || href === 'index.html') {
+                $('html, body').animate({
+                    scrollTop: 0
+                }, 600);
+            } else if (href && href !== '#') {
+                var target = $(href);
+                smoothScroll(target);
+            }
+        });
+
+        // Отдельный обработчик для обычных ссылок (не перехватываем их)
+        $('a[href$=".html"]').on('click', function(e) {
+            // Ничего не делаем, просто переходим по ссылке
+            return true;
+        });
+
+        // Обработка поиска
+        $('#search-icon, #search-icon *').on('click keypress', function (e) {
+            if (e.type === 'keypress' && e.key !== 'Enter' && e.key !== ' ') return;
+            e.preventDefault();
+            var searchQuery = $('#search-input').val();
+            if (searchQuery.trim() !== '') {
+                alert('Поиск: ' + searchQuery + '\nНайдено 15 вариантов жилья по вашему запросу.');
+            } else {
+                alert('Пожалуйста, введите запрос для поиска.');
+            }
+        });
+
+        // Обработка Enter в поле поиска
+        $('#search-input').on('keypress', function (e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                $('#search-icon').trigger('click');
+            }
+        });
+
+        // Обработка кнопок "Посмотреть варианты"
+        $('.view-offers').on('click', function (e) {
+            e.preventDefault();
+            var city = $(this).data('city');
+            alert('Открываю варианты жилья в ' + city + '...\nДоступно 24 предложения.');
+        });
+
+        // Обработка кнопки "Войти"
+        $('#login-btn').on('click', function (e) {
+            e.preventDefault();
+            alert('Форма входа будет доступна в следующей версии.');
+        });
+
+        // Мобильное меню
+        if ($('.mobile-menu-button').length === 0) {
+            var menuButton = $('<div class="mobile-menu-button item"><i class="bars icon"></i></div>');
+            $('.ui.fixed.menu .ui.container').append(menuButton);
+
+            // Создаем правильные ссылки для мобильного меню
+            var mobileMenuItems = `
+                <a href="index.html" class="item">Главная</a>
+                <a href="index.html#catalog" class="item">Каталог</a>
+                <a href="index.html#how-it-works" class="item">Как это работает</a>
+                <a href="index.html#reviews" class="item">Отзывы</a>
+                <a href="contacts.html" class="item">Контакты</a>
+                <a href="faq.html" class="item">FAQ</a>
+            `;
+            
+            var mobileMenu = $('<div class="mobile-menu" style="display: none;"></div>');
+            mobileMenu.html(mobileMenuItems);
+            $('body').append(mobileMenu);
+
+            menuButton.on('click', function () {
+                mobileMenu.slideToggle(200);
+            });
+
+            mobileMenu.on('click', 'a', function () {
+                mobileMenu.slideUp(200);
+            });
+        }
+
+        // Обновляем при изменении размера окна
+        $(window).on('resize', function () {
+            if (window.innerWidth > 767) {
+                $('.mobile-menu').hide();
+            }
+        });
+    });
     </script>
 </body>
 
